@@ -21,6 +21,7 @@
   --accent-glow: rgba(255, 122, 24, 0.25);
   --success: #22c55e;
   --error: #ef4444;
+  --warn: #f59e0b;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; min-height: 100vh; }
@@ -50,14 +51,10 @@ header {
 .brand-mark::before { content: ''; position: absolute; inset: 4px; border: 1px solid rgba(255,122,24,0.3); }
 .brand-mark svg { width: 22px; height: 22px; position: relative; z-index: 1; }
 .brand-text h1 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; line-height: 1; }
-.brand-text .sub {
-  font-family: 'JetBrains Mono', monospace; font-size: 11px;
-  color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px;
-}
+.brand-text .sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
 .status-pill {
   display: flex; align-items: center; gap: 8px;
-  font-family: 'JetBrains Mono', monospace; font-size: 11px;
-  text-transform: uppercase; letter-spacing: 1px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
   color: var(--text-dim); padding: 8px 14px; border: 1px solid var(--border); background: var(--panel);
 }
 .status-dot { width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; }
@@ -68,19 +65,13 @@ header {
 .layout { display: grid; grid-template-columns: 380px 1fr; gap: 24px; }
 @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
 .panel { background: var(--panel); border: 1px solid var(--border); }
-.panel-header {
-  padding: 16px 20px; border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
-}
+.panel-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
 .panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1.5px; }
 .panel-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 1px; }
 .panel-body { padding: 20px; }
 .field { margin-bottom: 18px; }
 .field:last-child { margin-bottom: 0; }
-.field label {
-  display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); margin-bottom: 8px;
-}
+.field label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); margin-bottom: 8px; }
 .field input[type="text"], .field input[type="password"], .field input[type="number"],
 .field select, .field textarea {
   width: 100%; background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
@@ -88,7 +79,7 @@ header {
   transition: border-color 0.15s;
 }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); }
-.field textarea { font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.6; resize: vertical; min-height: 140px; }
+.field textarea { font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.6; resize: vertical; min-height: 120px; }
 .field-hint { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -104,76 +95,62 @@ header {
 .btn.large { padding: 18px 32px; font-size: 18px; }
 .dropzone {
   border: 2px dashed var(--border-bright); background: var(--panel-2);
-  padding: 60px 30px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative;
+  padding: 60px 30px; text-align: center; cursor: pointer; transition: all 0.2s;
 }
 .dropzone:hover, .dropzone.dragover { border-color: var(--accent); background: rgba(255, 122, 24, 0.04); }
-.dropzone.has-image { padding: 20px; }
+.dropzone.has-image { padding: 16px; }
 .dropzone .icon { font-size: 38px; margin-bottom: 12px; color: var(--text-muted); }
 .dropzone.dragover .icon { color: var(--accent); }
 .dropzone .label { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1.5px; margin-bottom: 4px; }
 .dropzone .sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
-.dropzone img { max-width: 100%; max-height: 320px; display: block; margin: 0 auto; }
-.theme-display {
-  margin-top: 16px; padding: 14px 16px; border: 1px solid var(--border);
-  background: var(--panel-2); display: none;
-}
+.dropzone img { max-width: 100%; max-height: 280px; display: block; margin: 0 auto; }
+.theme-display { margin-top: 16px; padding: 14px 16px; border: 1px solid var(--border); background: var(--panel-2); display: none; }
 .theme-display.show { display: block; }
-.theme-display .theme-label {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); margin-bottom: 6px;
-}
-.theme-display .theme-value { font-family: 'Outfit', sans-serif; font-weight: 500; color: var(--accent); line-height: 1.4; font-size: 14px; }
+.theme-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); margin-bottom: 6px; }
+.theme-value { font-family: 'Outfit', sans-serif; font-weight: 500; color: var(--accent); line-height: 1.4; font-size: 14px; }
 .theme-display.fallback .theme-value { color: var(--text-dim); font-style: italic; }
-.status-bar {
-  margin-top: 24px; padding: 14px 16px; background: var(--panel-2); border: 1px solid var(--border);
-  font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim);
-  display: none; min-height: 48px; align-items: center; gap: 12px;
+.pipeline-track {
+  margin-top: 20px; display: none; border: 1px solid var(--border); background: var(--panel-2);
 }
-.status-bar.show { display: flex; }
-.status-bar .spinner {
-  width: 14px; height: 14px; border: 2px solid var(--border-bright);
-  border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0;
+.pipeline-track.show { display: block; }
+.pipeline-step {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 16px; border-bottom: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 12px;
 }
+.pipeline-step:last-child { border-bottom: none; }
+.step-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.step-status { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-left: auto; flex-shrink: 0; }
+.step-status.active { color: var(--accent); }
+.step-status.done { color: var(--success); }
+.step-status.error { color: var(--error); }
+.spinner { width: 14px; height: 14px; border: 2px solid var(--border-bright); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.status-bar.success { color: var(--success); border-color: rgba(34,197,94,0.4); }
-.status-bar.error { color: var(--error); border-color: rgba(239,68,68,0.4); }
-.status-bar.success .spinner, .status-bar.error .spinner { display: none; }
 .result { margin-top: 24px; display: none; }
 .result.show { display: block; }
 .result-img { width: 100%; background: var(--panel-2); border: 1px solid var(--border); display: block; }
-.result-meta {
-  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-  margin-top: 10px; padding: 8px 12px; background: var(--panel-2); border: 1px solid var(--border);
-  font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 1px;
-}
-.result-actions { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
-.result-actions .btn { flex: 1; min-width: 140px; }
-.scene-preview { margin-top: 16px; }
-.scene-preview-label {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;
-}
-.scene-preview img { width: 200px; max-width: 100%; border: 1px solid var(--border); display: block; }
+.result-meta { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 10px; padding: 8px 12px; background: var(--panel-2); border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 1px; }
+.result-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.result-actions .btn { flex: 1; min-width: 130px; }
+.compare-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.compare-item .compare-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+.compare-item img { width: 100%; border: 1px solid var(--border); display: block; }
 .collapsible { border: 1px solid var(--border); margin-bottom: 16px; }
 .collapsible:last-child { margin-bottom: 0; }
-.collapsible-header {
-  padding: 12px 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-  font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
-  color: var(--text-dim); background: var(--panel-2); user-select: none;
-}
+.collapsible-header { padding: 12px 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); background: var(--panel-2); user-select: none; }
 .collapsible-header:hover { color: var(--text); }
 .collapsible-header .chevron { transition: transform 0.2s; font-size: 14px; }
 .collapsible.open .collapsible-header .chevron { transform: rotate(90deg); }
 .collapsible-body { display: none; padding: 18px 16px; border-top: 1px solid var(--border); }
 .collapsible.open .collapsible-body { display: block; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-footer {
-  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border);
-  display: flex; justify-content: space-between;
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);
-  flex-wrap: wrap; gap: 12px;
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.cost-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1px;
+  color: var(--text-dim); padding: 4px 10px; border: 1px solid var(--border); background: var(--panel);
 }
+.info-block { padding: 12px 14px; border: 1px solid var(--border); background: rgba(255,122,24,0.05); margin-bottom: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); line-height: 1.6; }
+footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); flex-wrap: wrap; gap: 12px; }
 </style>
 </head>
 <body>
@@ -189,7 +166,7 @@ footer {
     </div>
     <div class="brand-text">
       <h1>Realistic Render Generator</h1>
-      <div class="sub">Composite Pipeline · Flux Scene + Browser Compositing</div>
+      <div class="sub">Two-Pass Pipeline · Scene + Flux 3D Naturalization</div>
     </div>
   </div>
   <div class="status-pill">
@@ -220,7 +197,6 @@ footer {
           <div class="field">
             <label>Groq API Key</label>
             <input type="password" id="groqKey" placeholder="gsk_...">
-            <div class="field-hint">Used for vision-based theme detection</div>
           </div>
           <button class="btn secondary full" onclick="saveKeys()">Save Keys</button>
         </div>
@@ -228,7 +204,7 @@ footer {
 
       <div class="field">
         <label>Material Finish</label>
-        <select id="material" onchange="onMaterialChange()">
+        <select id="material">
           <option value="matte_black">Matte Black Powder Coat</option>
           <option value="gloss_black" selected>Glossy Black Powder Coat</option>
           <option value="brushed_steel">Brushed Stainless Steel</option>
@@ -237,12 +213,12 @@ footer {
           <option value="copper_patina">Copper Patina</option>
           <option value="cast_iron">Black Cast Iron</option>
         </select>
-        <div class="field-hint">Switching after generation re-composites instantly · no API cost</div>
+        <div class="field-hint">Affects Flux prompt + composite tone · Re-naturalize to change</div>
       </div>
 
       <div class="field">
-        <label>Theme Override <span style="color:var(--text-muted);text-transform:none;letter-spacing:0;font-size:10px;">(empty = auto-detect)</span></label>
-        <input type="text" id="themeOverride" placeholder="e.g. rustic barn wood at sunset with warm light beams">
+        <label>Theme Override <span style="color:var(--text-muted);font-size:10px;letter-spacing:0;text-transform:none;">(empty = auto-detect)</span></label>
+        <input type="text" id="themeOverride" placeholder="e.g. rustic barn interior at sunset with campfire">
       </div>
 
       <div class="collapsible" id="advCollapse">
@@ -251,24 +227,50 @@ footer {
           <span class="chevron">›</span>
         </div>
         <div class="collapsible-body">
+
+          <div class="info-block">
+            Pipeline: Pass 1 generates the scene. Pass 2 img2img naturalizes a rough composite so Flux renders a real 3D metal sign with proper depth, material, and shadow.
+          </div>
+
           <div class="field">
-            <label>Scene Prompt Template</label>
-            <textarea id="promptTemplate"></textarea>
-            <div class="field-hint">{{THEME}} gets replaced before sending</div>
+            <label>Pass 1 · Scene Prompt Template</label>
+            <textarea id="sceneTemplate"></textarea>
+            <div class="field-hint">{{THEME}} replaced at runtime</div>
           </div>
+
+          <div class="field">
+            <label>Pass 2 · Naturalize Prompt Template</label>
+            <textarea id="naturalizeTemplate"></textarea>
+            <div class="field-hint">{{MATERIAL}} and {{THEME_BRIEF}} replaced at runtime</div>
+          </div>
+
           <div class="grid-2">
             <div class="field">
-              <label>Steps</label>
-              <input type="number" id="steps" value="24" min="10" max="50">
+              <label>P1 Steps</label>
+              <input type="number" id="p1Steps" value="24" min="10" max="50">
             </div>
             <div class="field">
-              <label>Seed (-1 random)</label>
-              <input type="number" id="seed" value="-1">
+              <label>P2 Steps</label>
+              <input type="number" id="p2Steps" value="20" min="8" max="40">
             </div>
           </div>
+
           <div class="grid-2">
             <div class="field">
-              <label>Sign Scale (0-1)</label>
+              <label>P2 Denoise</label>
+              <input type="number" id="p2Denoise" value="0.50" step="0.05" min="0.25" max="0.75">
+              <div class="field-hint">Higher = more 3D but geometry may drift</div>
+            </div>
+            <div class="field">
+              <label>CN Strength</label>
+              <input type="number" id="cnStrength" value="0.35" step="0.05" min="0" max="0.80">
+              <div class="field-hint">0 = skip ControlNet</div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label>Sign Scale</label>
               <input type="number" id="signScale" value="0.72" step="0.02" min="0.4" max="0.95">
             </div>
             <div class="field">
@@ -276,11 +278,17 @@ footer {
               <input type="number" id="signYOffset" value="-0.03" step="0.01" min="-0.2" max="0.2">
             </div>
           </div>
+
+          <div class="field">
+            <label>Seed (-1 = random)</label>
+            <input type="number" id="seed" value="-1">
+          </div>
+
           <div class="field">
             <label>Groq Vision Model</label>
             <input type="text" id="groqModel" value="meta-llama/llama-4-scout-17b-16e-instruct">
-            <div class="field-hint">Update if Groq deprecates this model</div>
           </div>
+
           <button class="btn secondary full" onclick="resetAdvanced()">Reset Defaults</button>
         </div>
       </div>
@@ -307,30 +315,56 @@ footer {
         <div class="theme-value" id="themeValue">—</div>
       </div>
 
-      <div style="margin-top: 24px;">
-        <button class="btn full large" id="generateBtn" onclick="generate()">⚡ Generate Render</button>
+      <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <button class="btn large" id="generateBtn" onclick="generate()" style="flex:1;">⚡ Generate Render</button>
+        <button class="btn secondary" id="renaturalizeBtn" onclick="renaturalize()" title="Re-run Pass 2 only (reuses scene)" disabled style="white-space:nowrap;">↩ Re-naturalize</button>
       </div>
 
-      <div class="status-bar" id="statusBar">
-        <div class="spinner" id="statusSpinner"></div>
-        <span id="statusText">Ready</span>
+      <div class="pipeline-track" id="pipelineTrack">
+        <div class="pipeline-step" id="stepDetect">
+          <div class="step-icon">🔍</div>
+          <div>Theme Detection · Groq Vision</div>
+          <div class="step-status" id="stepDetectStatus">—</div>
+        </div>
+        <div class="pipeline-step" id="stepScene">
+          <div class="step-icon">🌲</div>
+          <div>Pass 1 · Scene Generation · Flux text2img</div>
+          <div class="step-status" id="stepSceneStatus">—</div>
+        </div>
+        <div class="pipeline-step" id="stepNat">
+          <div class="step-icon">⚙️</div>
+          <div>Pass 2 · 3D Naturalization · Flux img2img</div>
+          <div class="step-status" id="stepNatStatus">—</div>
+        </div>
+        <div class="pipeline-step" id="stepFinal">
+          <div class="step-icon">✅</div>
+          <div>Final Blend · Browser</div>
+          <div class="step-status" id="stepFinalStatus">—</div>
+        </div>
       </div>
 
       <div class="result" id="result">
-        <img class="result-img" id="resultImg" alt="Generated render">
+        <img class="result-img" id="resultImg" alt="Final render">
         <div class="result-meta">
           <span id="metaSeed">SEED: —</span>
           <span id="metaSize">SIZE: —</span>
           <span id="metaMaterial">MATERIAL: —</span>
+          <span id="metaCost">COST EST: —</span>
         </div>
         <div class="result-actions">
-          <button class="btn full" onclick="downloadResult()">↓ Download</button>
-          <button class="btn secondary" onclick="recompositeOnly()">Re-composite</button>
+          <button class="btn full" onclick="downloadResult()">↓ Download Final</button>
+          <button class="btn secondary" onclick="downloadScene()">↓ Bare Scene</button>
           <button class="btn secondary" onclick="generate()">New Scene</button>
         </div>
-        <div class="scene-preview" id="scenePreview">
-          <div class="scene-preview-label">Bare Scene (debug)</div>
-          <img id="sceneImg" alt="Bare scene">
+        <div class="compare-row" id="compareRow">
+          <div class="compare-item">
+            <div class="compare-label">Pass 1 · Bare Scene</div>
+            <img id="sceneThumb" alt="Scene">
+          </div>
+          <div class="compare-item">
+            <div class="compare-label">Pass 2 · Raw Naturalized</div>
+            <img id="natThumb" alt="Naturalized">
+          </div>
         </div>
       </div>
 
@@ -341,8 +375,8 @@ footer {
 
 <footer>
   <div>RUNPOD · rjn9cue3u48gqm</div>
-  <div>FLUX DEV · TEXT-TO-SCENE</div>
-  <div>BROWSER COMPOSITE · ZERO API COST</div>
+  <div>FLUX DEV fp8 · TWO-PASS PIPELINE</div>
+  <div>PASS 1: SCENE · PASS 2: IMG2IMG + CN</div>
   <div>KEYS STORED LOCALLY</div>
 </footer>
 
@@ -350,47 +384,44 @@ footer {
 
 <script>
 // ==================== CONSTANTS ====================
-var DEFAULT_PROMPT = "Wide angle photograph: {{THEME}}. Professional photography, sharp focus, atmospheric depth of field, cinematic lighting, photorealistic, golden hour or dramatic lighting that creates strong contrast and visible light beams or glow in the background. No signs, no text, no logos, no plaques, no metal art, no banners.";
+var DEFAULT_SCENE_PROMPT = "Wide angle photograph: {{THEME}}. Professional photography, sharp focus, atmospheric depth of field, cinematic lighting, photorealistic, golden hour or dramatic lighting creating strong contrast and visible light or glow in background. No signs, no text, no logos, no plaques, no metal art.";
 
-var FALLBACK_THEME = "a clean neutral interior wall with warm directional lighting from the side casting soft shadows, subtle wooden floor visible at the bottom, professional product photography setup with depth of field";
+var DEFAULT_NATURALIZE_PROMPT = "{{MATERIAL}} laser-cut metal sign on a wooden post in a {{THEME_BRIEF}}, naturally integrated into scene as a physical 3D object, realistic metal material with depth and surface texture, proper cast shadow on the ground beneath the sign, foreground grass blades and vegetation in front of the sign base, the sign cutouts reveal the background scene behind, photorealistic, cinematic, sharp focus on the sign, professional photography";
 
 var RUNPOD_ENDPOINT = "rjn9cue3u48gqm";
 
 var MATERIALS = {
-  matte_black: { name: "Matte Black Powder Coat", color: { r: 22, g: 22, b: 24 }, highlight: 0.16, noise: 0.06, grainAlpha: 0.03, edgeLighten: 0.12 },
-  gloss_black: { name: "Glossy Black Powder Coat", color: { r: 16, g: 16, b: 18 }, highlight: 0.34, noise: 0.02, grainAlpha: 0.02, edgeLighten: 0.18 },
-  brushed_steel: { name: "Brushed Stainless Steel", color: { r: 145, g: 147, b: 152 }, highlight: 0.28, noise: 0.04, grainAlpha: 0.10, grain: "horizontal", edgeLighten: 0.15 },
-  rusted_steel: { name: "Raw Rusted Steel", color: { r: 118, g: 75, b: 48 }, highlight: 0.14, noise: 0.16, grainAlpha: 0.08, edgeLighten: 0.10 },
-  brushed_aluminum: { name: "Brushed Aluminum", color: { r: 170, g: 172, b: 178 }, highlight: 0.30, noise: 0.04, grainAlpha: 0.09, grain: "horizontal", edgeLighten: 0.18 },
-  copper_patina: { name: "Copper Patina", color: { r: 78, g: 118, b: 100 }, highlight: 0.18, noise: 0.14, grainAlpha: 0.06, edgeLighten: 0.10 },
-  cast_iron: { name: "Black Cast Iron", color: { r: 32, g: 30, b: 30 }, highlight: 0.10, noise: 0.20, grainAlpha: 0.04, edgeLighten: 0.08 }
+  matte_black:    { name: "Matte Black Powder Coat",    color: { r: 22,  g: 22,  b: 24  }, prompt: "matte black powder-coated steel" },
+  gloss_black:    { name: "Glossy Black Powder Coat",   color: { r: 16,  g: 16,  b: 18  }, prompt: "glossy black lacquered steel" },
+  brushed_steel:  { name: "Brushed Stainless Steel",    color: { r: 145, g: 147, b: 152 }, prompt: "brushed stainless steel" },
+  rusted_steel:   { name: "Raw Rusted Steel",           color: { r: 118, g: 75,  b: 48  }, prompt: "weathered rusted corten steel" },
+  brushed_aluminum: { name: "Brushed Aluminum",         color: { r: 170, g: 172, b: 178 }, prompt: "brushed anodized aluminum" },
+  copper_patina:  { name: "Copper Patina",              color: { r: 78,  g: 118, b: 100 }, prompt: "aged copper with green patina" },
+  cast_iron:      { name: "Black Cast Iron",            color: { r: 32,  g: 30,  b: 30  }, prompt: "dark rough cast iron" }
 };
 
 // ==================== STATE ====================
 var uploadedDesignImg = null;
 var uploadedDesignName = "";
 var lastSceneImage = null;
+var lastNatImage = null;
 var lastSeed = null;
 var lastDetectedTheme = null;
+var lastSignBounds = null;
 var lastResultDataUrl = null;
+var lastSceneDataUrl = null;
 
 // ==================== INIT ====================
 window.addEventListener('DOMContentLoaded', function() {
   document.getElementById('runpodKey').value = localStorage.getItem('rrg_runpodKey') || '';
   document.getElementById('groqKey').value = localStorage.getItem('rrg_groqKey') || '';
-  document.getElementById('promptTemplate').value = localStorage.getItem('rrg_prompt') || DEFAULT_PROMPT;
-
+  document.getElementById('sceneTemplate').value = localStorage.getItem('rrg_scenePrompt') || DEFAULT_SCENE_PROMPT;
+  document.getElementById('naturalizeTemplate').value = localStorage.getItem('rrg_natPrompt') || DEFAULT_NATURALIZE_PROMPT;
   var savedMat = localStorage.getItem('rrg_material');
   if (savedMat && MATERIALS[savedMat]) document.getElementById('material').value = savedMat;
-
-  if (!localStorage.getItem('rrg_runpodKey') || !localStorage.getItem('rrg_groqKey')) {
-    document.getElementById('apiCollapse').classList.add('open');
-  }
-
-  document.getElementById('promptTemplate').addEventListener('change', function(e) {
-    localStorage.setItem('rrg_prompt', e.target.value);
-  });
-
+  if (!localStorage.getItem('rrg_runpodKey')) document.getElementById('apiCollapse').classList.add('open');
+  document.getElementById('sceneTemplate').addEventListener('change', function(e) { localStorage.setItem('rrg_scenePrompt', e.target.value); });
+  document.getElementById('naturalizeTemplate').addEventListener('change', function(e) { localStorage.setItem('rrg_natPrompt', e.target.value); });
   setupDropzone();
   setStatus('idle', 'Idle');
 });
@@ -400,24 +431,47 @@ function toggleCollapse(id) { document.getElementById(id).classList.toggle('open
 function saveKeys() {
   localStorage.setItem('rrg_runpodKey', document.getElementById('runpodKey').value.trim());
   localStorage.setItem('rrg_groqKey', document.getElementById('groqKey').value.trim());
-  flashStatus('Keys saved to this browser.', 'success');
+  setStepStatus('detect', 'Keys saved', 'done');
+  setTimeout(function() { resetStepStatuses(); }, 2000);
 }
 
 function resetAdvanced() {
-  document.getElementById('promptTemplate').value = DEFAULT_PROMPT;
-  document.getElementById('steps').value = 24;
-  document.getElementById('seed').value = -1;
+  document.getElementById('sceneTemplate').value = DEFAULT_SCENE_PROMPT;
+  document.getElementById('naturalizeTemplate').value = DEFAULT_NATURALIZE_PROMPT;
+  document.getElementById('p1Steps').value = 24;
+  document.getElementById('p2Steps').value = 20;
+  document.getElementById('p2Denoise').value = 0.50;
+  document.getElementById('cnStrength').value = 0.35;
   document.getElementById('signScale').value = 0.72;
   document.getElementById('signYOffset').value = -0.03;
-  document.getElementById('groqModel').value = 'meta-llama/llama-4-scout-17b-16e-instruct';
-  localStorage.removeItem('rrg_prompt');
-  flashStatus('Advanced defaults restored.', 'success');
+  document.getElementById('seed').value = -1;
+  localStorage.removeItem('rrg_scenePrompt');
+  localStorage.removeItem('rrg_natPrompt');
 }
 
-function onMaterialChange() {
-  var mat = document.getElementById('material').value;
-  localStorage.setItem('rrg_material', mat);
-  if (lastSceneImage && uploadedDesignImg) recompositeOnly();
+// ==================== PIPELINE STEP UI ====================
+function resetStepStatuses() {
+  ['detect', 'scene', 'nat', 'final'].forEach(function(id) {
+    var el = document.getElementById('step' + capitalise(id) + 'Status');
+    if (el) { el.textContent = '—'; el.className = 'step-status'; }
+  });
+}
+function capitalise(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function setStepStatus(id, text, state) {
+  var el = document.getElementById('step' + capitalise(id) + 'Status');
+  if (!el) return;
+  el.className = 'step-status ' + (state || '');
+  if (state === 'active') {
+    el.innerHTML = '<div class="spinner"></div>';
+  } else {
+    el.textContent = text;
+  }
+}
+
+// ==================== STATUS HEADER ====================
+function setStatus(state, msg) {
+  document.getElementById('connStatus').className = 'status-dot ' + (state === 'idle' ? 'live' : state);
+  document.getElementById('connLabel').textContent = msg;
 }
 
 // ==================== DROPZONE ====================
@@ -430,37 +484,32 @@ function setupDropzone() {
   ['dragleave', 'dragend', 'drop'].forEach(function(ev) {
     dz.addEventListener(ev, function(e) { e.preventDefault(); dz.classList.remove('dragover'); });
   });
-  dz.addEventListener('drop', function(e) {
-    if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-  });
-  fi.addEventListener('change', function(e) {
-    if (e.target.files.length) handleFile(e.target.files[0]);
-  });
+  dz.addEventListener('drop', function(e) { if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]); });
+  fi.addEventListener('change', function(e) { if (e.target.files.length) handleFile(e.target.files[0]); });
 }
 
 function handleFile(file) {
-  if (!file.type.startsWith('image/')) {
-    flashStatus('File must be an image.', 'error');
-    return;
-  }
+  if (!file.type.startsWith('image/')) return;
   uploadedDesignName = file.name.replace(/\.[^.]+$/, '');
   var reader = new FileReader();
   reader.onload = function(e) {
-    var dataUrl = e.target.result;
     var img = new Image();
     img.onload = function() {
       uploadedDesignImg = img;
       var dz = document.getElementById('dropzone');
-      dz.innerHTML = '<img src="' + dataUrl + '" alt="design">';
+      dz.innerHTML = '<img src="' + e.target.result + '" alt="design">';
       dz.classList.add('has-image');
       var dims = pickFluxResolution(img.width, img.height);
-      document.getElementById('resolutionTag').textContent = 'RES: ' + dims.w + '×' + dims.h;
+      document.getElementById('resolutionTag').textContent = 'RES: ' + dims.w + 'x' + dims.h;
       document.getElementById('themeDisplay').classList.remove('show', 'fallback');
       document.getElementById('result').classList.remove('show');
+      document.getElementById('pipelineTrack').classList.remove('show');
       lastSceneImage = null;
+      lastNatImage = null;
       lastResultDataUrl = null;
+      document.getElementById('renaturalizeBtn').disabled = true;
     };
-    img.src = dataUrl;
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
@@ -481,67 +530,148 @@ function imgToBase64(img) {
   return c.toDataURL('image/png').split(',')[1];
 }
 
-// ==================== STATUS UI ====================
-function setStatus(state, msg) {
-  var dot = document.getElementById('connStatus');
-  dot.className = 'status-dot ' + (state === 'idle' ? 'live' : state);
-  document.getElementById('connLabel').textContent = msg;
-}
-function showStatus(msg, kind) {
-  var bar = document.getElementById('statusBar');
-  bar.classList.add('show');
-  bar.classList.remove('success', 'error');
-  if (kind === 'success') bar.classList.add('success');
-  else if (kind === 'error') bar.classList.add('error');
-  document.getElementById('statusText').textContent = msg;
-}
-function flashStatus(msg, kind) {
-  showStatus(msg, kind);
-  setTimeout(function() { document.getElementById('statusBar').classList.remove('show'); }, 3000);
+function canvasToBase64(canvas) {
+  return canvas.toDataURL('image/png').split(',')[1];
 }
 
 // ==================== GROQ THEME DETECTION ====================
+var GROQ_SYSTEM = "You analyze a black and white CNC stencil design and describe where the resulting laser-cut metal sign would be mounted and displayed.\n\nInclude: (1) a solid mounting surface in the foreground center — wood post, brick wall, log wall, concrete wall, etc. (2) the themed environment around it (3) atmospheric lighting with visible light contrast or glow that would show through the sign cutouts.\n\nDO NOT describe a sign. Only describe the scene environment.\n\nExamples:\n- RV and campfire -> rough weathered wooden post in the center foreground, forest campground at twilight with pine trees and a glowing campfire in the soft focus background, warm orange firelight, atmospheric mist\n- Horse jockey -> rustic barn wood post in center foreground, hay bales and barn interior with sunset light beams streaming through wood wall gaps, golden hour dust haze\n- Excavator -> chain link fence post in center foreground, construction yard at sunset with heavy machinery silhouettes, golden sun visible behind dust haze, atmospheric backlighting\n- Deer crest or shield -> rough cabin log wall in center foreground, stone fireplace with warm amber firelight visible to side, cozy interior with light beams and dust motes\n- Vintage car -> polished concrete garage wall in center, classic car visible in soft focus background, professional studio lighting, key light from upper left\n- Eagle patriotic -> weathered wooden plank wall in center, American countryside at sunset, warm orange and pink sky\n- Family name -> aged brick wall in center, climbing greenery, warm afternoon sunlight with directional shadows\n\nIf no clear subject: respond NO_THEME\n\nRespond with ONE sentence (no quotes, no preamble) or NO_THEME.";
+
 function detectTheme(designImg, groqKey, model) {
-  var sysPrompt = "You are analyzing a black and white CNC stencil design that will be displayed as a real laser-cut metal wall art sign. Identify the main subject of the design, then describe a fitting environment that will be photographed BEHIND the sign.\n\nThe scene must include:\n1. A solid mounting surface in the foreground center (wood post, brick wall, log wall, fence, concrete wall, etc.)\n2. The themed background environment behind that surface\n3. Atmospheric lighting that creates strong contrast and visible light beams or glow\n\nDO NOT mention 'the sign' or describe a sign. Only describe the environment and lighting.\n\nExamples:\n- Horse and jockey -> rustic barn interior with rough wooden post in the foreground center, hay bales and wooden walls with sunset light beams streaming through gaps in the wood slats, golden hour, warm atmospheric haze\n- Excavator and trees -> chain link fence in the foreground center, construction yard at sunset with heavy machinery silhouettes in soft focus, golden sun visible behind machinery, dust haze, atmospheric backlighting\n- RV and campfire -> rough wooden post in the foreground center, forest campground at twilight with pine trees and a glowing campfire visible in soft focus background, warm orange firelight, atmospheric\n- Deer or shield -> rough cabin log wall in the foreground center, stone fireplace with warm amber firelight visible to one side, cozy interior with light beams and dust motes in the air\n- Vintage car logo -> polished concrete garage wall in the foreground center, classic car visible in soft focus background, professional studio lighting with key light from upper left, industrial atmosphere\n- Eagle or patriotic -> weathered wooden plank wall in the foreground center, American countryside at sunset with sky in warm orange and pink, soft focus rolling hills\n- Family name script -> aged brick exterior wall in the foreground center, climbing greenery, warm afternoon sunlight casting strong directional shadows, atmospheric\n- Abstract or text only -> aged concrete wall in the foreground center, industrial workshop interior with warm ambient light from overhead, atmospheric haze\n\nIf you cannot identify a clear subject, respond EXACTLY: NO_THEME\n\nRespond with ONLY one sentence describing the scene (no quotes, no preamble) or NO_THEME.";
-
   var b64 = imgToBase64(designImg);
-
-  var body = {
-    model: model,
-    messages: [{
-      role: "user",
-      content: [
-        { type: "text", text: sysPrompt },
-        { type: "image_url", image_url: { url: "data:image/png;base64," + b64 } }
-      ]
-    }],
-    max_tokens: 160,
-    temperature: 0.4
-  };
-
   return fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": "Bearer " + groqKey },
-    body: JSON.stringify(body)
+    body: JSON.stringify({
+      model: model,
+      messages: [{ role: "user", content: [
+        { type: "text", text: GROQ_SYSTEM },
+        { type: "image_url", image_url: { url: "data:image/png;base64," + b64 } }
+      ]}],
+      max_tokens: 160,
+      temperature: 0.4
+    })
   }).then(function(res) {
-    if (!res.ok) {
-      return res.text().then(function(t) {
-        throw new Error("Groq vision failed: " + res.status + " " + t.slice(0, 200));
-      });
-    }
+    if (!res.ok) return res.text().then(function(t) { throw new Error("Groq " + res.status + ": " + t.slice(0, 200)); });
     return res.json();
   }).then(function(data) {
-    var out = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content || "").trim();
-    out = out.replace(/^["']|["']$/g, '');
+    var out = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content || "").trim().replace(/^["']|["']$/g, '');
     if (!out || out.toUpperCase().indexOf("NO_THEME") !== -1) return null;
     return out;
   });
 }
 
-// ==================== FLUX SCENE WORKFLOW ====================
+// ==================== ROUGH COMPOSITE ====================
+function calcSignBounds(W, H, designAR, signScale, signYOffset) {
+  var maxW = W * signScale;
+  var maxH = H * signScale;
+  var signW, signH;
+  if (designAR > maxW / maxH) { signW = maxW; signH = signW / designAR; }
+  else { signH = maxH; signW = signH * designAR; }
+  var signX = (W - signW) / 2;
+  var signY = (H - signH) / 2 + (signYOffset * H);
+  return { x: Math.round(signX), y: Math.round(signY), w: Math.round(signW), h: Math.round(signH) };
+}
+
+function createRoughComposite(sceneImg, designImg, materialKey, signScale, signYOffset) {
+  var W = sceneImg.width;
+  var H = sceneImg.height;
+  var canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  var ctx = canvas.getContext('2d');
+  var mat = MATERIALS[materialKey];
+
+  ctx.drawImage(sceneImg, 0, 0);
+
+  var bounds = calcSignBounds(W, H, designImg.width / designImg.height, signScale, signYOffset);
+
+  // Render design as material-colored silhouette (white = transparent = scene shows through)
+  var silCanvas = document.createElement('canvas');
+  silCanvas.width = bounds.w; silCanvas.height = bounds.h;
+  var silCtx = silCanvas.getContext('2d');
+  silCtx.drawImage(designImg, 0, 0, bounds.w, bounds.h);
+  var imgData = silCtx.getImageData(0, 0, bounds.w, bounds.h);
+  var d = imgData.data;
+  for (var i = 0; i < d.length; i += 4) {
+    var br = (d[i] + d[i+1] + d[i+2]) / 3;
+    if (br > 128 || d[i+3] < 128) {
+      d[i+3] = 0;
+    } else {
+      // Slightly lighter than final material color so Flux has color context
+      d[i] = Math.min(255, mat.color.r + 28);
+      d[i+1] = Math.min(255, mat.color.g + 28);
+      d[i+2] = Math.min(255, mat.color.b + 28);
+      d[i+3] = 255;
+    }
+  }
+  silCtx.putImageData(imgData, 0, 0);
+  ctx.drawImage(silCanvas, bounds.x, bounds.y);
+
+  // Add foreground grass hint at bottom of sign (guides Flux to place grass in front)
+  var grassY = bounds.y + bounds.h * 0.72;
+  var grassH = bounds.h * 0.32;
+  ctx.save();
+  ctx.globalAlpha = 0.55;
+  for (var g = 0; g < 70; g++) {
+    var gx = bounds.x + Math.random() * bounds.w;
+    var gh = grassH * 0.3 + Math.random() * grassH * 0.5;
+    var lean = (Math.random() - 0.5) * 18;
+    var green = Math.round(55 + Math.random() * 45);
+    ctx.strokeStyle = 'rgb(25,' + green + ',15)';
+    ctx.lineWidth = 1.2 + Math.random() * 1.8;
+    ctx.beginPath();
+    ctx.moveTo(gx, grassY + gh * 0.3);
+    ctx.quadraticCurveTo(gx + lean, grassY - gh * 0.3, gx + lean * 0.4, grassY - gh);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  return { canvas: canvas, bounds: bounds };
+}
+
+// ==================== FINAL BLEND (pass2 sign + pass1 scene) ====================
+function finalBlend(pass1Img, pass2Img, designImg, bounds) {
+  var W = pass1Img.width;
+  var H = pass1Img.height;
+  var canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  var ctx = canvas.getContext('2d');
+
+  // 1. Draw pass2 (naturalized) as the base (has sign + modified scene)
+  ctx.drawImage(pass2Img, 0, 0);
+
+  // 2. Restore pass1 scene OUTSIDE the sign region via punch-through mask
+  // Create a temp canvas with pass1 that has a feathered hole where the sign is
+  var tempCanvas = document.createElement('canvas');
+  tempCanvas.width = W; tempCanvas.height = H;
+  var tempCtx = tempCanvas.getContext('2d');
+  tempCtx.drawImage(pass1Img, 0, 0);
+
+  // Punch hole in pass1 at sign bounds (with feathering so edge blends naturally)
+  tempCtx.save();
+  tempCtx.globalCompositeOperation = 'destination-out';
+  var padX = Math.round(bounds.w * 0.04);
+  var padY = Math.round(bounds.h * 0.04);
+  var holeX = bounds.x - padX;
+  var holeY = bounds.y - padY;
+  var holeW = bounds.w + padX * 2;
+  var holeH = bounds.h + padY * 2 + Math.round(bounds.h * 0.18); // extend below for shadow zone
+  tempCtx.filter = 'blur(' + Math.round(Math.max(8, bounds.w * 0.015)) + 'px)';
+  tempCtx.fillStyle = 'rgba(0,0,0,1)';
+  tempCtx.fillRect(holeX, holeY, holeW, holeH);
+  tempCtx.filter = 'none';
+  tempCtx.restore();
+
+  // Composite pass1 (with hole) on top of pass2 — restores clean background
+  ctx.drawImage(tempCanvas, 0, 0);
+
+  return canvas;
+}
+
+// ==================== PASS 1 WORKFLOW ====================
 function buildSceneWorkflow(prompt, width, height, seed, steps) {
   return {
-    "1": { "inputs": { "ckpt_name": "flux1-dev-fp8.safetensors" }, "class_type": "CheckpointLoaderSimple", "_meta": { "title": "Flux Dev fp8" } },
+    "1": { "inputs": { "ckpt_name": "flux1-dev-fp8.safetensors" }, "class_type": "CheckpointLoaderSimple", "_meta": { "title": "Checkpoint" } },
     "2": { "inputs": { "text": prompt, "clip": ["1", 1] }, "class_type": "CLIPTextEncode", "_meta": { "title": "Positive" } },
     "3": { "inputs": { "text": "", "clip": ["1", 1] }, "class_type": "CLIPTextEncode", "_meta": { "title": "Negative" } },
     "4": { "inputs": { "width": width, "height": height, "batch_size": 1 }, "class_type": "EmptyLatentImage", "_meta": { "title": "Latent" } },
@@ -558,277 +688,111 @@ function buildSceneWorkflow(prompt, width, height, seed, steps) {
   };
 }
 
-// ==================== CANVAS COMPOSITING ====================
-function buildShadowLayer(designImg, w, h) {
-  var canvas = document.createElement('canvas');
-  canvas.width = w; canvas.height = h;
-  var ctx = canvas.getContext('2d');
-  ctx.drawImage(designImg, 0, 0, w, h);
-  var imgData = ctx.getImageData(0, 0, w, h);
-  var d = imgData.data;
-  for (var i = 0; i < d.length; i += 4) {
-    var brightness = (d[i] + d[i+1] + d[i+2]) / 3;
-    var srcAlpha = d[i+3];
-    if (brightness > 128 || srcAlpha < 128) { d[i+3] = 0; }
-    else { d[i] = 0; d[i+1] = 0; d[i+2] = 0; d[i+3] = 255; }
-  }
-  ctx.putImageData(imgData, 0, 0);
-  return canvas;
-}
+// ==================== PASS 2 WORKFLOW (img2img + optional ControlNet) ====================
+function buildNaturalizeWorkflow(prompt, seed, steps, denoise, cnStrength) {
+  var useCN = cnStrength > 0;
+  var wf = {};
 
-function buildMetalLayer(designImg, w, h, mat, sceneTint) {
-  var canvas = document.createElement('canvas');
-  canvas.width = w; canvas.height = h;
-  var ctx = canvas.getContext('2d');
+  wf["1"] = { "inputs": { "image": "rough_composite.png", "upload": "image" }, "class_type": "LoadImage", "_meta": { "title": "Load Composite" } };
+  wf["2"] = { "inputs": { "ckpt_name": "flux1-dev-fp8.safetensors" }, "class_type": "CheckpointLoaderSimple", "_meta": { "title": "Checkpoint" } };
+  wf["3"] = { "inputs": { "pixels": ["1", 0], "vae": ["2", 2] }, "class_type": "VAEEncode", "_meta": { "title": "Encode" } };
+  wf["4"] = { "inputs": { "text": prompt, "clip": ["2", 1] }, "class_type": "CLIPTextEncode", "_meta": { "title": "Positive" } };
+  wf["5"] = { "inputs": { "text": "", "clip": ["2", 1] }, "class_type": "CLIPTextEncode", "_meta": { "title": "Negative" } };
 
-  ctx.drawImage(designImg, 0, 0, w, h);
-  var imgData = ctx.getImageData(0, 0, w, h);
-  var d = imgData.data;
-  for (var i = 0; i < d.length; i += 4) {
-    var brightness = (d[i] + d[i+1] + d[i+2]) / 3;
-    var srcAlpha = d[i+3];
-    if (brightness > 128 || srcAlpha < 128) {
-      d[i+3] = 0;
-    } else {
-      var ns = (Math.random() - 0.5) * mat.noise * 255;
-      d[i]   = Math.max(0, Math.min(255, mat.color.r + ns));
-      d[i+1] = Math.max(0, Math.min(255, mat.color.g + ns));
-      d[i+2] = Math.max(0, Math.min(255, mat.color.b + ns));
-      d[i+3] = 255;
-    }
-  }
-  ctx.putImageData(imgData, 0, 0);
+  var positiveRef = ["4", 0];
+  var negativeRef = ["5", 0];
 
-  ctx.globalCompositeOperation = 'source-atop';
-  var grad = ctx.createLinearGradient(0, 0, 0, h);
-  grad.addColorStop(0,    'rgba(255,255,255,' + (mat.highlight).toFixed(3) + ')');
-  grad.addColorStop(0.45, 'rgba(255,255,255,' + (mat.highlight * 0.18).toFixed(3) + ')');
-  grad.addColorStop(0.65, 'rgba(0,0,0,0.10)');
-  grad.addColorStop(1,    'rgba(0,0,0,0.42)');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, w, h);
-
-  var radGrad = ctx.createRadialGradient(w * 0.32, h * 0.28, 0, w * 0.32, h * 0.28, Math.max(w, h) * 0.55);
-  radGrad.addColorStop(0,   'rgba(255,255,255,' + (mat.highlight * 0.55).toFixed(3) + ')');
-  radGrad.addColorStop(0.5, 'rgba(255,255,255,0)');
-  ctx.fillStyle = radGrad;
-  ctx.fillRect(0, 0, w, h);
-
-  if (mat.grain === 'horizontal') {
-    var grainCount = Math.floor(h * 1.2);
-    for (var g = 0; g < grainCount; g++) {
-      var yPos = Math.random() * h;
-      var alpha = (Math.random() - 0.5) * mat.grainAlpha;
-      ctx.fillStyle = (alpha > 0 ? 'rgba(255,255,255,' : 'rgba(0,0,0,') + Math.abs(alpha).toFixed(3) + ')';
-      ctx.fillRect(0, yPos, w, 1);
-    }
-  }
-
-  if (sceneTint) {
-    ctx.fillStyle = 'rgba(' + sceneTint.r + ',' + sceneTint.g + ',' + sceneTint.b + ',0.07)';
-    ctx.fillRect(0, 0, w, h);
-  }
-
-  ctx.globalCompositeOperation = 'source-over';
-  return canvas;
-}
-
-function sampleSceneTint(sceneImg) {
-  var c = document.createElement('canvas');
-  var W = sceneImg.width;
-  var H = sceneImg.height;
-  c.width = W; c.height = H;
-  var ctx = c.getContext('2d');
-  ctx.drawImage(sceneImg, 0, 0);
-  var data = ctx.getImageData(Math.round(W*0.2), Math.round(H*0.2), Math.round(W*0.6), Math.round(H*0.6)).data;
-  var r = 0, g = 0, b = 0, count = 0;
-  for (var i = 0; i < data.length; i += 16) {
-    r += data[i]; g += data[i+1]; b += data[i+2]; count++;
-  }
-  return { r: Math.round(r / count), g: Math.round(g / count), b: Math.round(b / count) };
-}
-
-function compositeRender(sceneImg, designImg, materialKey, signScale, signYOffset) {
-  var W = sceneImg.width;
-  var H = sceneImg.height;
-  var canvas = document.createElement('canvas');
-  canvas.width = W; canvas.height = H;
-  var ctx = canvas.getContext('2d');
-
-  ctx.drawImage(sceneImg, 0, 0);
-
-  var designAR = designImg.width / designImg.height;
-  var maxW = W * signScale;
-  var maxH = H * signScale;
-  var signW, signH;
-  if (designAR > maxW / maxH) {
-    signW = maxW;
-    signH = signW / designAR;
-  } else {
-    signH = maxH;
-    signW = signH * designAR;
-  }
-  var signX = (W - signW) / 2;
-  var signY = (H - signH) / 2 + (signYOffset * H);
-
-  var tint = sampleSceneTint(sceneImg);
-  var mat = MATERIALS[materialKey];
-
-  var shadow = buildShadowLayer(designImg, signW, signH);
-  ctx.save();
-  ctx.globalAlpha = 0.55;
-  var shadowBlur = Math.max(8, signW * 0.014);
-  ctx.filter = 'blur(' + shadowBlur + 'px)';
-  ctx.drawImage(shadow, signX + signW * 0.012, signY + signH * 0.028);
-  ctx.restore();
-
-  if (mat.edgeLighten > 0) {
-    var edgeMat = {
-      color: {
-        r: Math.min(255, Math.round(mat.color.r * (1 + mat.edgeLighten * 1.5))),
-        g: Math.min(255, Math.round(mat.color.g * (1 + mat.edgeLighten * 1.5))),
-        b: Math.min(255, Math.round(mat.color.b * (1 + mat.edgeLighten * 1.5)))
+  if (useCN) {
+    wf["6"] = { "inputs": { "control_net_name": "flux-canny-controlnet-v3.safetensors" }, "class_type": "ControlNetLoader", "_meta": { "title": "ControlNet" } };
+    wf["7"] = { "inputs": { "image": "design.png", "upload": "image" }, "class_type": "LoadImage", "_meta": { "title": "Load Design" } };
+    wf["8"] = { "inputs": { "image": ["7", 0], "low_threshold": 100, "high_threshold": 200, "l2gradient": false }, "class_type": "CannyEdgePreprocessor", "_meta": { "title": "Canny" } };
+    wf["9"] = {
+      "inputs": {
+        "positive": ["4", 0], "negative": ["5", 0],
+        "control_net": ["6", 0], "image": ["8", 0],
+        "strength": cnStrength, "start_percent": 0.0, "end_percent": 0.65
       },
-      highlight: 0, noise: 0, grainAlpha: 0
+      "class_type": "ControlNetApplyAdvanced", "_meta": { "title": "Apply CN" }
     };
-    var edgeLayer = buildMetalLayer(designImg, signW + 2, signH + 2, edgeMat, null);
-    ctx.save();
-    ctx.globalAlpha = 0.55;
-    ctx.drawImage(edgeLayer, signX - 1, signY - 1);
-    ctx.restore();
+    positiveRef = ["9", 0];
+    negativeRef = ["9", 1];
   }
 
-  var metal = buildMetalLayer(designImg, signW, signH, mat, tint);
-  ctx.drawImage(metal, signX, signY);
+  var sampleNode = {
+    "inputs": {
+      "seed": seed, "steps": steps, "cfg": 1.0,
+      "sampler_name": "euler", "scheduler": "simple", "denoise": denoise,
+      "model": ["2", 0], "positive": positiveRef, "negative": negativeRef, "latent_image": ["3", 0]
+    },
+    "class_type": "KSampler", "_meta": { "title": "Sample" }
+  };
+  wf["10"] = sampleNode;
+  wf["11"] = { "inputs": { "samples": ["10", 0], "vae": ["2", 2] }, "class_type": "VAEDecode", "_meta": { "title": "Decode" } };
+  wf["12"] = { "inputs": { "filename_prefix": "naturalized", "images": ["11", 0] }, "class_type": "SaveImage", "_meta": { "title": "Save" } };
 
-  return canvas;
+  return wf;
 }
 
-// ==================== MAIN GENERATE ====================
-function generate() {
-  var runpodKey = (document.getElementById('runpodKey').value || localStorage.getItem('rrg_runpodKey') || '').trim();
-  var groqKey = (document.getElementById('groqKey').value || localStorage.getItem('rrg_groqKey') || '').trim();
-
-  if (!runpodKey) {
-    flashStatus('Add your RunPod API key in Configuration first.', 'error');
-    document.getElementById('apiCollapse').classList.add('open');
-    return;
-  }
-  if (!uploadedDesignImg) {
-    flashStatus('Upload a B&W design first.', 'error');
-    return;
-  }
-
-  var btn = document.getElementById('generateBtn');
-  btn.disabled = true;
-  document.getElementById('result').classList.remove('show');
-  setStatus('busy', 'Working');
-
-  var override = document.getElementById('themeOverride').value.trim();
-
-  var themePromise;
-  if (override) {
-    themePromise = Promise.resolve(override);
-  } else if (groqKey) {
-    showStatus('Analyzing design for theme detection...', 'progress');
-    var groqModel = document.getElementById('groqModel').value.trim() || 'meta-llama/llama-4-scout-17b-16e-instruct';
-    themePromise = detectTheme(uploadedDesignImg, groqKey, groqModel).catch(function(err) {
-      console.warn('Theme detection failed:', err);
-      return null;
-    });
-  } else {
-    themePromise = Promise.resolve(null);
-  }
-
-  themePromise.then(function(theme) {
-    var themeDisp = document.getElementById('themeDisplay');
-    var themeVal = document.getElementById('themeValue');
-    var isFallback = false;
-    if (!theme) {
-      theme = FALLBACK_THEME;
-      isFallback = true;
-      themeVal.textContent = '(no theme detected — neutral wall fallback)';
-    } else {
-      themeVal.textContent = theme;
-    }
-    themeDisp.classList.toggle('fallback', isFallback);
-    themeDisp.classList.add('show');
-    lastDetectedTheme = theme;
-
-    var template = document.getElementById('promptTemplate').value || DEFAULT_PROMPT;
-    var scenePrompt = template.replace(/\{\{THEME\}\}/g, theme);
-
-    var dims = pickFluxResolution(uploadedDesignImg.width, uploadedDesignImg.height);
-    var seedInput = parseInt(document.getElementById('seed').value, 10);
-    var seed = (isNaN(seedInput) || seedInput < 0) ? Math.floor(Math.random() * 1e15) : seedInput;
-    var steps = parseInt(document.getElementById('steps').value, 10) || 24;
-
-    var workflow = buildSceneWorkflow(scenePrompt, dims.w, dims.h, seed, steps);
-    showStatus('Submitting scene generation (' + dims.w + '×' + dims.h + ', seed ' + seed + ')...', 'progress');
-
-    return fetch('https://api.runpod.ai/v2/' + RUNPOD_ENDPOINT + '/run', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + runpodKey },
-      body: JSON.stringify({ input: { workflow: workflow } })
-    }).then(function(res) {
-      if (!res.ok) {
-        return res.text().then(function(t) {
-          throw new Error('RunPod submit failed: ' + res.status + ' ' + t.slice(0, 300));
-        });
-      }
-      return res.json();
-    }).then(function(submitData) {
-      var jobId = submitData.id;
-      if (!jobId) throw new Error('No job ID returned from RunPod');
-      showStatus('Job ' + jobId.slice(0, 8) + ' queued · cold start may take ~30s...', 'progress');
-      return pollRunPod(runpodKey, jobId, dims, seed);
-    });
-  }).then(function(meta) {
-    if (!meta) return;
-    showStatus('Compositing in browser...', 'progress');
-    return loadImageFromBase64(meta.imgB64).then(function(sceneImg) {
-      lastSceneImage = sceneImg;
-      lastSeed = meta.seed;
-      runComposite();
-      showStatus('Render complete · ' + meta.dims.w + '×' + meta.dims.h + ' · seed ' + meta.seed, 'success');
-      setStatus('idle', 'Idle');
-    });
-  }).catch(function(err) {
-    console.error(err);
-    showStatus('Error: ' + err.message, 'error');
-    setStatus('error', 'Error');
-  }).then(function() {
-    btn.disabled = false;
+// ==================== RUNPOD API ====================
+function submitJob(apiKey, workflow, images) {
+  var payload = { input: { workflow: workflow } };
+  if (images && images.length) payload.input.images = images;
+  return fetch('https://api.runpod.ai/v2/' + RUNPOD_ENDPOINT + '/run', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
+    body: JSON.stringify(payload)
+  }).then(function(res) {
+    if (!res.ok) return res.text().then(function(t) { throw new Error('RunPod submit ' + res.status + ': ' + t.slice(0, 300)); });
+    return res.json();
+  }).then(function(data) {
+    if (!data.id) throw new Error('No job ID returned');
+    return data.id;
   });
 }
 
-function recompositeOnly() {
-  if (!lastSceneImage || !uploadedDesignImg) {
-    flashStatus('Generate a scene first.', 'error');
-    return;
+function pollJob(apiKey, jobId) {
+  var start = Date.now();
+  var TIMEOUT = 7 * 60 * 1000;
+  var lastStatus = '';
+  function tick() {
+    if (Date.now() - start > TIMEOUT) throw new Error('RunPod timeout (7 min)');
+    return fetch('https://api.runpod.ai/v2/' + RUNPOD_ENDPOINT + '/status/' + jobId, {
+      headers: { 'Authorization': 'Bearer ' + apiKey }
+    }).then(function(r) {
+      if (!r.ok) return sleep(2500).then(tick);
+      return r.json();
+    }).then(function(data) {
+      if (!data) return sleep(2500).then(tick);
+      if (data.status !== lastStatus) {
+        lastStatus = data.status;
+        var elapsedS = Math.floor((Date.now() - start) / 1000);
+        console.log('Job ' + jobId.slice(0, 8) + ' · ' + data.status + ' · ' + elapsedS + 's');
+      }
+      if (data.status === 'COMPLETED') {
+        var b64 = extractB64(data.output);
+        if (!b64) { console.error('Output:', data.output); throw new Error('No image in job output. Check console.'); }
+        return b64;
+      }
+      if (data.status === 'FAILED' || data.status === 'CANCELLED') {
+        throw new Error('Job ' + data.status + ': ' + (data.error || JSON.stringify(data.output || {}).slice(0, 200)));
+      }
+      return sleep(2500).then(tick);
+    });
   }
-  showStatus('Re-compositing...', 'progress');
-  setTimeout(function() {
-    runComposite();
-    flashStatus('Re-composited with new material (no API cost).', 'success');
-  }, 50);
+  return tick();
 }
 
-function runComposite() {
-  var materialKey = document.getElementById('material').value;
-  var signScale = parseFloat(document.getElementById('signScale').value) || 0.72;
-  var signYOffset = parseFloat(document.getElementById('signYOffset').value) || -0.03;
-  var canvas = compositeRender(lastSceneImage, uploadedDesignImg, materialKey, signScale, signYOffset);
-  var dataUrl = canvas.toDataURL('image/png');
-  lastResultDataUrl = dataUrl;
-
-  document.getElementById('resultImg').src = dataUrl;
-  document.getElementById('sceneImg').src = lastSceneImage.src;
-  document.getElementById('result').classList.add('show');
-
-  document.getElementById('metaSeed').textContent = 'SEED: ' + (lastSeed || '—');
-  document.getElementById('metaSize').textContent = 'SIZE: ' + canvas.width + '×' + canvas.height;
-  document.getElementById('metaMaterial').textContent = 'MATERIAL: ' + MATERIALS[materialKey].name.toUpperCase();
+function extractB64(output) {
+  if (!output) return null;
+  if (typeof output === 'string' && output.length > 100) return output;
+  if (output.message && typeof output.message === 'string' && output.message.length > 100) {
+    return output.message.indexOf('data:image') === 0 ? output.message.split(',')[1] : output.message;
+  }
+  if (Array.isArray(output.images) && output.images[0]) {
+    var im = output.images[0];
+    return typeof im === 'string' ? im : (im.data || im.image || null);
+  }
+  return null;
 }
 
 function loadImageFromBase64(b64) {
@@ -840,65 +804,218 @@ function loadImageFromBase64(b64) {
   });
 }
 
-function pollRunPod(apiKey, jobId, dims, seed) {
-  var start = Date.now();
-  var TIMEOUT_MS = 6 * 60 * 1000;
-  var lastStatusVal = '';
-
-  function tick() {
-    if (Date.now() - start > TIMEOUT_MS) throw new Error('Timeout waiting for RunPod result (6 min)');
-    return fetch('https://api.runpod.ai/v2/' + RUNPOD_ENDPOINT + '/status/' + jobId, {
-      headers: { 'Authorization': 'Bearer ' + apiKey }
-    }).then(function(r) {
-      if (!r.ok) return sleep(2000).then(tick);
-      return r.json();
-    }).then(function(data) {
-      if (!data) return sleep(2000).then(tick);
-      if (data.status !== lastStatusVal) {
-        var elapsed = Math.floor((Date.now() - start) / 1000);
-        showStatus(data.status + ' · ' + elapsed + 's elapsed', 'progress');
-        lastStatusVal = data.status;
-      }
-      if (data.status === 'COMPLETED') {
-        var b64 = extractImageBase64(data.output);
-        if (!b64) {
-          console.error('RunPod output payload:', data.output);
-          throw new Error('Job completed but no image found in response (see console).');
-        }
-        return { imgB64: b64, dims: dims, seed: seed };
-      }
-      if (data.status === 'FAILED' || data.status === 'CANCELLED') {
-        var detail = data.error || (data.output && JSON.stringify(data.output).slice(0, 300)) || 'unknown';
-        throw new Error('Job ' + data.status + ': ' + detail);
-      }
-      return sleep(2000).then(tick);
-    });
-  }
-  return tick();
-}
-
-function extractImageBase64(output) {
-  if (!output) return null;
-  if (typeof output === 'string' && output.length > 100) return output;
-  if (typeof output.message === 'string' && output.message.length > 100) {
-    if (output.message.indexOf('data:image') === 0) return output.message.split(',')[1];
-    return output.message;
-  }
-  if (Array.isArray(output.images) && output.images[0]) {
-    var im = output.images[0];
-    if (typeof im === 'string') return im;
-    if (im.data) return im.data;
-    if (im.image) return im.image;
-  }
-  return null;
-}
-
 function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
+// ==================== MAIN GENERATE ====================
+function getApiKeys() {
+  return {
+    runpod: (document.getElementById('runpodKey').value || localStorage.getItem('rrg_runpodKey') || '').trim(),
+    groq: (document.getElementById('groqKey').value || localStorage.getItem('rrg_groqKey') || '').trim()
+  };
+}
+
+function generate() {
+  var keys = getApiKeys();
+  if (!keys.runpod) { alert('Add RunPod API key in Configuration.'); document.getElementById('apiCollapse').classList.add('open'); return; }
+  if (!uploadedDesignImg) { alert('Upload a design first.'); return; }
+
+  var btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  document.getElementById('renaturalizeBtn').disabled = true;
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('pipelineTrack').classList.add('show');
+  document.getElementById('material').addEventListener('change', function() { localStorage.setItem('rrg_material', this.value); });
+  resetStepStatuses();
+  setStatus('busy', 'Working');
+
+  var materialKey = document.getElementById('material').value;
+  var override = document.getElementById('themeOverride').value.trim();
+  var groqModel = document.getElementById('groqModel').value.trim() || 'meta-llama/llama-4-scout-17b-16e-instruct';
+  var dims = pickFluxResolution(uploadedDesignImg.width, uploadedDesignImg.height);
+  var seedInput = parseInt(document.getElementById('seed').value, 10);
+  var seed = (isNaN(seedInput) || seedInput < 0) ? Math.floor(Math.random() * 1e15) : seedInput;
+  var p1Steps = parseInt(document.getElementById('p1Steps').value, 10) || 24;
+  var p2Steps = parseInt(document.getElementById('p2Steps').value, 10) || 20;
+  var p2Denoise = parseFloat(document.getElementById('p2Denoise').value) || 0.50;
+  var cnStrength = parseFloat(document.getElementById('cnStrength').value) || 0;
+  var signScale = parseFloat(document.getElementById('signScale').value) || 0.72;
+  var signYOffset = parseFloat(document.getElementById('signYOffset').value) || -0.03;
+
+  // Step 1: Theme detection
+  setStepStatus('detect', '', 'active');
+  var themePromise;
+  if (override) {
+    themePromise = Promise.resolve(override);
+  } else if (keys.groq) {
+    themePromise = detectTheme(uploadedDesignImg, keys.groq, groqModel).catch(function(err) {
+      console.warn('Theme detection failed:', err);
+      return null;
+    });
+  } else {
+    themePromise = Promise.resolve(null);
+  }
+
+  var FALLBACK_THEME = "a clean neutral concrete wall with warm directional side lighting, subtle wooden floor, professional product photography setup";
+
+  themePromise.then(function(theme) {
+    var isFallback = false;
+    if (!theme) { theme = FALLBACK_THEME; isFallback = true; }
+    lastDetectedTheme = theme;
+
+    var themeDisp = document.getElementById('themeDisplay');
+    document.getElementById('themeValue').textContent = isFallback ? '(fallback: neutral wall)' : theme;
+    themeDisp.classList.toggle('fallback', isFallback);
+    themeDisp.classList.add('show');
+    setStepStatus('detect', isFallback ? 'Fallback' : 'Done', 'done');
+
+    // Step 2: Scene generation (Pass 1)
+    setStepStatus('scene', '', 'active');
+    var sceneTemplate = document.getElementById('sceneTemplate').value || DEFAULT_SCENE_PROMPT;
+    var scenePrompt = sceneTemplate.replace(/\{\{THEME\}\}/g, theme);
+    var sceneWorkflow = buildSceneWorkflow(scenePrompt, dims.w, dims.h, seed, p1Steps);
+
+    return submitJob(keys.runpod, sceneWorkflow, []).then(function(jobId) {
+      setStepStatus('scene', 'Running', 'active');
+      return pollJob(keys.runpod, jobId);
+    });
+  }).then(function(sceneB64) {
+    lastSceneDataUrl = 'data:image/png;base64,' + sceneB64;
+    return loadImageFromBase64(sceneB64).then(function(sceneImg) {
+      lastSceneImage = sceneImg;
+      setStepStatus('scene', 'Done', 'done');
+      document.getElementById('sceneThumb').src = lastSceneDataUrl;
+
+      // Step 3: Naturalization (Pass 2)
+      setStepStatus('nat', '', 'active');
+      var mat = MATERIALS[materialKey];
+      var themeBrief = lastDetectedTheme ? lastDetectedTheme.split(' ').slice(0, 8).join(' ') : 'outdoor scene';
+      var natTemplate = document.getElementById('naturalizeTemplate').value || DEFAULT_NATURALIZE_PROMPT;
+      var natPrompt = natTemplate
+        .replace(/\{\{MATERIAL\}\}/g, mat.prompt)
+        .replace(/\{\{THEME_BRIEF\}\}/g, themeBrief);
+
+      var signScale = parseFloat(document.getElementById('signScale').value) || 0.72;
+      var signYOffset = parseFloat(document.getElementById('signYOffset').value) || -0.03;
+      var roughResult = createRoughComposite(sceneImg, uploadedDesignImg, materialKey, signScale, signYOffset);
+      lastSignBounds = roughResult.bounds;
+      var roughB64 = canvasToBase64(roughResult.canvas);
+
+      var natImages = [{ name: "rough_composite.png", image: roughB64 }];
+      if (cnStrength > 0) {
+        natImages.push({ name: "design.png", image: imgToBase64(uploadedDesignImg) });
+      }
+
+      var p2Seed = seed + 1;
+      var natWorkflow = buildNaturalizeWorkflow(natPrompt, p2Seed, p2Steps, p2Denoise, cnStrength);
+      lastSeed = seed;
+
+      return submitJob(keys.runpod, natWorkflow, natImages).then(function(jobId) {
+        setStepStatus('nat', 'Running', 'active');
+        return pollJob(keys.runpod, jobId);
+      });
+    });
+  }).then(function(natB64) {
+    setStepStatus('nat', 'Done', 'done');
+    setStepStatus('final', '', 'active');
+    return loadImageFromBase64(natB64).then(function(natImg) {
+      lastNatImage = natImg;
+      document.getElementById('natThumb').src = 'data:image/png;base64,' + natB64;
+
+      // Step 4: Final blend
+      var finalCanvas = finalBlend(lastSceneImage, natImg, uploadedDesignImg, lastSignBounds);
+      lastResultDataUrl = finalCanvas.toDataURL('image/png');
+
+      document.getElementById('resultImg').src = lastResultDataUrl;
+      document.getElementById('result').classList.add('show');
+      document.getElementById('metaSeed').textContent = 'SEED: ' + lastSeed;
+      document.getElementById('metaSize').textContent = 'SIZE: ' + finalCanvas.width + 'x' + finalCanvas.height;
+      document.getElementById('metaMaterial').textContent = 'MAT: ' + MATERIALS[materialKey].name.toUpperCase();
+      document.getElementById('metaCost').textContent = 'EST: ~$0.020';
+
+      setStepStatus('final', 'Done', 'done');
+      setStatus('idle', 'Idle');
+      document.getElementById('renaturalizeBtn').disabled = false;
+    });
+  }).catch(function(err) {
+    console.error(err);
+    setStepStatus('scene', err.message.indexOf('Pass 1') !== -1 ? 'Error' : 'Error', 'error');
+    setStepStatus('nat', 'Error', 'error');
+    setStepStatus('final', '—', '');
+    setStatus('error', 'Error');
+    alert('Error: ' + err.message);
+  }).then(function() {
+    btn.disabled = false;
+  });
+}
+
+// ==================== RE-NATURALIZE (reuse scene, re-run pass 2) ====================
+function renaturalize() {
+  if (!lastSceneImage || !uploadedDesignImg) { alert('Generate a scene first.'); return; }
+  var keys = getApiKeys();
+  if (!keys.runpod) { alert('RunPod API key missing.'); return; }
+
+  var btn = document.getElementById('renaturalizeBtn');
+  btn.disabled = true;
+  document.getElementById('generateBtn').disabled = true;
+  setStatus('busy', 'Re-naturalizing');
+  resetStepStatuses();
+  setStepStatus('detect', 'Reusing', 'done');
+  setStepStatus('scene', 'Reusing scene', 'done');
+  setStepStatus('nat', '', 'active');
+
+  var materialKey = document.getElementById('material').value;
+  var mat = MATERIALS[materialKey];
+  var themeBrief = lastDetectedTheme ? lastDetectedTheme.split(' ').slice(0, 8).join(' ') : 'outdoor scene';
+  var natTemplate = document.getElementById('naturalizeTemplate').value || DEFAULT_NATURALIZE_PROMPT;
+  var natPrompt = natTemplate.replace(/\{\{MATERIAL\}\}/g, mat.prompt).replace(/\{\{THEME_BRIEF\}\}/g, themeBrief);
+  var signScale = parseFloat(document.getElementById('signScale').value) || 0.72;
+  var signYOffset = parseFloat(document.getElementById('signYOffset').value) || -0.03;
+  var p2Steps = parseInt(document.getElementById('p2Steps').value, 10) || 20;
+  var p2Denoise = parseFloat(document.getElementById('p2Denoise').value) || 0.50;
+  var cnStrength = parseFloat(document.getElementById('cnStrength').value) || 0;
+
+  var roughResult = createRoughComposite(lastSceneImage, uploadedDesignImg, materialKey, signScale, signYOffset);
+  lastSignBounds = roughResult.bounds;
+  var roughB64 = canvasToBase64(roughResult.canvas);
+
+  var p2Seed = Math.floor(Math.random() * 1e15);
+  var natImages = [{ name: "rough_composite.png", image: roughB64 }];
+  if (cnStrength > 0) natImages.push({ name: "design.png", image: imgToBase64(uploadedDesignImg) });
+
+  var natWorkflow = buildNaturalizeWorkflow(natPrompt, p2Seed, p2Steps, p2Denoise, cnStrength);
+
+  submitJob(keys.runpod, natWorkflow, natImages).then(function(jobId) {
+    setStepStatus('nat', 'Running', 'active');
+    return pollJob(keys.runpod, jobId);
+  }).then(function(natB64) {
+    setStepStatus('nat', 'Done', 'done');
+    setStepStatus('final', '', 'active');
+    return loadImageFromBase64(natB64).then(function(natImg) {
+      lastNatImage = natImg;
+      document.getElementById('natThumb').src = 'data:image/png;base64,' + natB64;
+      var finalCanvas = finalBlend(lastSceneImage, natImg, uploadedDesignImg, lastSignBounds);
+      lastResultDataUrl = finalCanvas.toDataURL('image/png');
+      document.getElementById('resultImg').src = lastResultDataUrl;
+      document.getElementById('result').classList.add('show');
+      document.getElementById('metaMaterial').textContent = 'MAT: ' + MATERIALS[materialKey].name.toUpperCase();
+      document.getElementById('metaCost').textContent = 'EST: ~$0.008';
+      setStepStatus('final', 'Done', 'done');
+      setStatus('idle', 'Idle');
+    });
+  }).catch(function(err) {
+    console.error(err);
+    setStepStatus('nat', 'Error', 'error');
+    setStatus('error', 'Error');
+    alert('Error: ' + err.message);
+  }).then(function() {
+    btn.disabled = false;
+    document.getElementById('generateBtn').disabled = false;
+  });
+}
+
 // ==================== DOWNLOAD ====================
-function downloadResult() {
-  if (!lastResultDataUrl) return;
-  var b64 = lastResultDataUrl.split(',')[1];
+function downloadDataUrl(dataUrl, filename) {
+  var b64 = dataUrl.split(',')[1];
   var bin = atob(b64);
   var arr = new Uint8Array(bin.length);
   for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
@@ -906,13 +1023,23 @@ function downloadResult() {
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
   a.href = url;
-  var ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-  var matKey = document.getElementById('material').value;
-  a.download = (uploadedDesignName || 'render') + '_' + matKey + '_' + ts + '.png';
+  a.download = filename;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+function downloadResult() {
+  if (!lastResultDataUrl) return;
+  var ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  var mat = document.getElementById('material').value;
+  downloadDataUrl(lastResultDataUrl, (uploadedDesignName || 'render') + '_' + mat + '_' + ts + '.png');
+}
+
+function downloadScene() {
+  if (!lastSceneDataUrl) return;
+  downloadDataUrl(lastSceneDataUrl, (uploadedDesignName || 'render') + '_scene.png');
 }
 </script>
 </body>
